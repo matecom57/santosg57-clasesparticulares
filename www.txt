@@ -1,0 +1,7 @@
+https://dev.to/lynerlwl/how-to-solve-git-error-rpc-failed-http-400-curl-22-the-requested-url-returned-error-400-5mf
+
+git config --global http.postBuffer 150000000
+
+git config --global --get http.postBuffer
+
+
