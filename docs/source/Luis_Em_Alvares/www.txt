@@ -1,3 +1,6 @@
+https://www.sascha-frank.com/latex-font-size.html
+https://www.baeldung.com/cs/latex-include-vs-input
+
 - Razones y Proporciones (Foto 2)
 - Radicación (Foto 3 y 4)
 
