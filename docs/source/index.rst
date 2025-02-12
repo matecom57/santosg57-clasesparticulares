@@ -19,5 +19,5 @@ Contents
 .. toctree::
 
    usage
-   :doc:`Matematicas\matematicas`
+   Matematicas/matematicas
    api
