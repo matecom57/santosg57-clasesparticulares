@@ -19,5 +19,5 @@ Contents
 .. toctree::
 
    usage
-   .. include:: ./Luis_Em_Alvares/p1.pdf
+   :doc:`Matematicas\matematicas`
    api
