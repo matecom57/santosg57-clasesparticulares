@@ -20,4 +20,5 @@ Contents
 
    usage
    Matematicas/matematicas
+   Fisica/fisica
    api
