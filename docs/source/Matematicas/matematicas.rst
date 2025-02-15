@@ -39,6 +39,9 @@ Matemáticas - 2
 .. image:: mat52.png
    :scale: 60 %
 
+.. image:: desigualdades.png
+   :scale: 60 %
+
 **E07 ---------------------------------**
 
 .. image:: mat53.png
