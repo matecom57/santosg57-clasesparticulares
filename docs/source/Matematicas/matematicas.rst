@@ -12,6 +12,8 @@ Matemáticas
 .. image:: mat48.png
    :scale: 60 %
 
+.. image:: binomio.png
+
 **E03 ------------------------------------**
 
 
