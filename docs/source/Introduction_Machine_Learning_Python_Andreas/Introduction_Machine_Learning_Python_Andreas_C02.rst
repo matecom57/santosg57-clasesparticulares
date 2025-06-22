@@ -1,380 +1,493 @@
 Introduction_Machine_Learning_Python_Andreas_C02
 ================================================
 
-APTER 2
-Supervised Learning
+**chAPTER 2
+Supervised Learning**
+
 ./t.sh  "As we mentioned earlier, supervised machine learning is one of the most commonly used and successful types of machine learning. In this chapter, we will describe supervised learning in more detail and explain several popular supervised learning algorithms. We already saw an application of supervised machine learning in Chapter 1: classifying iris flowers into several species using physical measurements of the flowers."
+
 Como mencionamos anteriormente, el aprendizaje automático supervisado es uno de los tipos de aprendizaje automático más utilizados y exitosos. En este capítulo, describiremos el aprendizaje supervisado con más detalle y explicaremos varios algoritmos de aprendizaje supervisado populares. Ya vimos una aplicación del aprendizaje automático supervisado en el Capítulo 1: clasificar las flores de iris en varias especies utilizando mediciones físicas de las flores.
 
 ./t.sh  "Remember that supervised learning is used whenever we want to predict a certain outcome from a given input, and we have examples of input/output pairs. We build a machine learning model from these input/output pairs, which comprise our training set. Our goal is to make accurate predictions for new, never-before-seen data. Supervised learning often requires human effort to build the training set, but afterward automates and often speeds up an otherwise laborious or infeasible task."
+
 Recuerde que el aprendizaje supervisado se utiliza siempre que queremos predecir un determinado resultado a partir de una entrada determinada, y tenemos ejemplos de pares de entrada/salida. Construimos un modelo de aprendizaje automático a partir de estos pares de entrada/salida, que componen nuestro conjunto de entrenamiento. Nuestro objetivo es hacer predicciones precisas para datos nuevos y nunca antes vistos. El aprendizaje supervisado a menudo requiere esfuerzo humano para construir el conjunto de capacitación, pero luego automatiza y a menudo acelera una tarea que de otro modo sería laboriosa o inviable.
 
-Classification and Regression
+**Classification and Regression**
+
 ./t.sh  "There are two major types of supervised machine learning problems, called classification and regression."
+
 Hay dos tipos principales de problemas de aprendizaje automático supervisados, llamados clasificación y regresión.
 
 ./t.sh  "In classification, the goal is to predict a class label, which is a choice from a predefined list of possibilities. In Chapter 1 we used the example of classifying irises into one of three possible species. Classification is sometimes separated into binary classification, which is the special case of distinguishing between exactly two classes, and multiclass classification, which is classification between more than two classes. You can think of binary classification as trying to answer a yes/no question. Classifying emails as either spam or not spam is an example of a binary classification problem. In this binary classification task, the yes/no question being asked would be “Is this email spam?”"
+
 En la clasificación, el objetivo es predecir una etiqueta de clase, que es una elección de una lista predefinida de posibilidades. En el Capítulo 1 utilizamos el ejemplo de clasificar los lirios en una de tres especies posibles. La clasificación a veces se separa en clasificación binaria, que es el caso especial de distinguir exactamente dos clases, y clasificación multiclase, que es la clasificación entre más de dos clases. Puede pensar en la clasificación binaria como un intento de responder una pregunta de sí o no. Clasificar correos electrónicos como spam o no spam es un ejemplo de un problema de clasificación binaria. En esta tarea de clasificación binaria, la pregunta de sí o no sería "¿Este correo electrónico es spam?"
 
 ./t.sh  "In binary classification we often speak of one class being the positive class and the other class being the negative class. Here, positive doesn’t represent having benefit or value, but rather what the object of the study is. So, when looking for spam, “positive” could mean the spam class. Which of the two classes is called positive is often a subjective matter, and specific to the domain."
+
 En la clasificación binaria a menudo hablamos de que una clase es la clase positiva y la otra clase es la clase negativa. Aquí positivo no representa tener beneficio o valor, sino cuál es el objeto de estudio. Entonces, cuando se busca spam, "positivo" podría significar la clase de spam. Cuál de las dos clases se denomina positiva es a menudo una cuestión subjetiva y específica del dominio.
 
 ./t.sh  "The iris example, on the other hand, is an example of a multiclass classification problem. Another example is predicting what language a website is in from the text on the website. The classes here would be a pre-defined list of possible languages."
+
 El ejemplo del iris, por otro lado, es un ejemplo de un problema de clasificación multiclase. Otro ejemplo es predecir en qué idioma se encuentra un sitio web a partir del texto del sitio web. Las clases aquí serían una lista predefinida de posibles idiomas.
 
 ./t.sh  "For regression tasks, the goal is to predict a continuous number, or a floating-point number in programming terms (or real number in mathematical terms). Predicting a person’s annual income from their education, their age, and where they live is an example of a regression task. When predicting income, the predicted value is an amount, and can be any number in a given range. Another example of a regression task is predicting the yield of a corn farm given attributes such as previous yields, weather, and number of employees working on the farm. The yield again can be an arbitrary number."
+
 Para las tareas de regresión, el objetivo es predecir un número continuo o un número de punto flotante en términos de programación (o un número real en términos matemáticos). Predecir los ingresos anuales de una persona en función de su educación, su edad y el lugar donde vive es un ejemplo de tarea de regresión. Al predecir ingresos, el valor previsto es una cantidad y puede ser cualquier número dentro de un rango determinado. Otro ejemplo de una tarea de regresión es predecir el rendimiento de una granja de maíz teniendo en cuenta atributos como rendimientos anteriores, clima y cantidad de empleados que trabajan en la granja. El rendimiento nuevamente puede ser un número arbitrario.
 
 ./t.sh  "An easy way to distinguish between classification and regression tasks is to ask whether there is some kind of continuity in the output. If there is continuity between possible outcomes, then the problem is a regression problem. Think about predicting annual income. There is a clear continuity in the output. Whether a person makes $40,000 or $40,001 a year does not make a tangible difference, even though these are different amounts of money; if our algorithm predicts $39,999 or $40,001 when it should have predicted $40,000, we don’t mind that much."
+
 Una manera fácil de distinguir entre tareas de clasificación y regresión es preguntar si existe algún tipo de continuidad en el resultado. Si hay continuidad entre los posibles resultados, entonces el problema es un problema de regresión. Piense en predecir los ingresos anuales. Hay una clara continuidad en la producción. Que una persona gane 0,000 o 0,001 al año no supone una diferencia tangible, aunque se trate de cantidades diferentes de dinero; Si nuestro algoritmo predice 9,999 o 0,001 cuando debería haber predicho 0,000, no nos importa mucho.
 
 ./t.sh  "By contrast, for the task of recognizing the language of a website (which is a classifi‐ cation problem), there is no matter of degree. A website is in one language, or it is in another. There is no continuity between languages, and there is no language that is between English and French.1"
+
 Por el contrario, para la tarea de reconocer el idioma de un sitio web (que es un problema de clasificación), no hay cuestión de grado. Un sitio web está en un idioma o está en otro. No hay continuidad entre idiomas y no hay ningún idioma que esté entre el inglés y el francés.1
 
-Generalization, Overfitting, and Underfitting
+**Generalization, Overfitting, and Underfitting**
+
 ./t.sh  "In supervised learning, we want to build a model on the training data and then be able to make accurate predictions on new, unseen data that has the same characteristics as the training set that we used. If a model is able to make accurate predictions on unseen data, we say it is able to generalize from the training set to the test set. We want to build a model that is able to generalize as accurately as possible." >> tt.txt
 
 En el aprendizaje supervisado, queremos construir un modelo a partir de los datos de entrenamiento y luego poder hacer predicciones precisas a partir de datos nuevos, no vistos, que tengan las mismas características que el conjunto de entrenamiento que usamos. Si un modelo puede hacer predicciones precisas a partir de datos no vistos, decimos que puede generalizar desde el conjunto de entrenamiento al conjunto de prueba. Queremos construir un modelo que pueda generalizar con la mayor precisión posible.
 
 
 ./t.sh  "1 We ask linguists to excuse the simplified presentation of languages as distinct and fixed entities." >> tt.txt
+
 ./t.sh  "Usually we build a model in such a way that it can make accurate predictions on the training set. If the training and test sets have enough in common, we expect the model to also be accurate on the test set. However, there are some cases where this can go wrong. For example, if we allow ourselves to build very complex models, we can always be as accurate as we like on the training set." >> tt.txt
+
 Normalmente, construimos un modelo de tal manera que pueda hacer predicciones precisas en el conjunto de entrenamiento. Si los conjuntos de entrenamiento y prueba tienen suficientes cosas en común, esperamos que el modelo también sea preciso en el conjunto de prueba. Sin embargo, hay algunos casos en los que esto puede salir mal. Por ejemplo, si nos permitimos construir modelos muy complejos, siempre podemos ser tan precisos como queramos en el conjunto de entrenamiento.
 
 ./t.sh  "Let’s take a look at a made-up example to illustrate this point. Say a novice data scientist wants to predict whether a customer will buy a boat, given records of previous boat buyers and customers who we know are not interested in buying a boat.2 The goal is to send out promotional emails to people who are likely to actually make a purchase, but not bother those customers who won’t be interested." >> tt.txt
+
 Veamos un ejemplo inventado para ilustrar este punto. Digamos que un científico de datos novato quiere predecir si un cliente comprará un barco, a partir de los registros de compradores de barcos anteriores y de clientes que sabemos que no están interesados ​​en comprar un barco.2 El objetivo es enviar correos electrónicos promocionales a personas que probablemente realicen una compra, pero no molestar a aquellos clientes que no estarán interesados.
 
 Suppose we have the customer records shown in Table 2-1.
 
 
 ./t.sh  "After looking at the data for a while, our novice data scientist comes up with the following rule: “If the customer is older than 45, and has less than 3 children or is not divorced, then they want to buy a boat.” When asked how well this rule of his does, our data scientist answers, “It’s 100 percent accurate!” And indeed, on the data that is in the table, the rule is perfectly accurate. There are many possible rules we could come up with that would explain perfectly if someone in this dataset wants to buy a boat. No age appears twice in the data, so we could say people who are 66, 52, 53, or" >> tt.txt
+
 Después de observar los datos durante un rato, nuestro científico de datos novato propone la siguiente regla: "Si el cliente tiene más de 45 años y menos de 3 hijos o no está divorciado, entonces quiere comprar un barco". Cuando le preguntamos qué tan bien funciona esta regla, nuestro científico de datos responde: "¡Es 100 por ciento precisa!" Y, de hecho, en los datos que están en la tabla, la regla es perfectamente precisa. Hay muchas reglas posibles que podríamos idear que explicarían perfectamente si alguien en este conjunto de datos quiere comprar un barco. Ninguna edad aparece dos veces en los datos, por lo que podríamos decir que las personas que tienen 66, 52, 53 o 64 años quieren comprar un barco.
 
 
 ./t.sh  "2 In the real world, this is actually a tricky problem. While we know that the other customers haven’t bought a boat from us yet, they might have bought one from someone else, or they may still be saving and plan to buy  one in the future." >> tt.txt
+
 En el mundo real, este es un problema complicado. Si bien sabemos que otros clientes aún no nos han comprado un barco, es posible que hayan comprado uno a otra persona o que aún estén ahorrando y planeen comprar uno en el futuro.
 
 
 ./t.sh  "58 years old want to buy a boat, while all others don’t. While we can make up many rules that work well on this data, remember that we are not interested in making predictions for this dataset; we already know the answers for these customers. We want to know if new customers are likely to buy a boat. We therefore want to find a rule that will work well for new customers, and achieving 100 percent accuracy on the training set does not help us there. We might not expect that the rule our data scientist came up with will work very well on new customers. It seems too complex, and it is supported by very little data. For example, the “or is not divorced” part of the rule hinges on a single customer." >> tt.txt
+
 58 años quiere comprar un barco, mientras que el resto no. Si bien podemos crear muchas reglas que funcionen bien con estos datos, recuerde que no nos interesa hacer predicciones para este conjunto de datos; ya conocemos las respuestas para estos clientes. Queremos saber si es probable que los nuevos clientes compren un barco. Por lo tanto, queremos encontrar una regla que funcione bien para los nuevos clientes, y lograr una precisión del 100 por ciento en el conjunto de entrenamiento no nos ayuda en ese aspecto. Es posible que no esperemos que la regla que se le ocurrió a nuestro científico de datos funcione muy bien con los nuevos clientes. Parece demasiado compleja y está respaldada por muy pocos datos. Por ejemplo, la parte de la regla que dice “o no está divorciado” depende de un solo cliente.
 
 
 ./t.sh  "The only measure of whether an algorithm will perform well on new data is the evaluation on the test set. However, intuitively3 we expect simple models to generalize better to new data. If the rule was “People older than 50 want to buy a boat,” and this would explain the behavior of all the customers, we would trust it more than the rule involving children and marital status in addition to age. Therefore, we always want to find the simplest model. Building a model that is too complex for the amount of information we have, as our novice data scientist did, is called overfitting. Overfitting occurs when you fit a model too closely to the particularities of the training set and obtain a model that works well on the training set but is not able to generalize to new data. On the other hand, if your model is too simple—say, “Everybody who owns a house buys a boat”—then you might not be able to capture all the aspects of and variability in the data, and your model will do badly even on the training set. Choosing too simple a model is called underfitting." >> tt.txt
+
 La única medida de si un algoritmo funcionará bien con nuevos datos es la evaluación en el conjunto de prueba. Sin embargo, intuitivamente3 esperamos que los modelos simples se generalicen mejor a nuevos datos. Si la regla fuera “Las personas mayores de 50 años quieren comprar un barco”, y esto explicaría el comportamiento de todos los clientes, confiaríamos más en ella que en la regla que incluye hijos y estado civil además de la edad. Por lo tanto, siempre queremos encontrar el modelo más simple. Construir un modelo que sea demasiado complejo para la cantidad de información que tenemos, como hizo nuestro científico de datos novato, se llama sobreajuste. El sobreajuste ocurre cuando ajustas un modelo demasiado de cerca a las particularidades del conjunto de entrenamiento y obtienes un modelo que funciona bien en el conjunto de entrenamiento pero que no es capaz de generalizarse a nuevos datos. Por otro lado, si tu modelo es demasiado simple (por ejemplo, “Todos los que tienen una casa compran un barco”), entonces es posible que no puedas capturar todos los aspectos y la variabilidad de los datos, y tu modelo funcionará mal incluso en el conjunto de entrenamiento. Elegir un modelo demasiado simple se llama subajuste.
 
 
 ./t.sh  "The more complex we allow our model to be, the better we will be able to predict on the training data. However, if our model becomes too complex, we start focusing too much on each individual data point in our training set, and the model will not generalize well to new data." >> tt.txt
+
 Cuanto más complejo sea nuestro modelo, mejor podremos hacer predicciones a partir de los datos de entrenamiento. Sin embargo, si nuestro modelo se vuelve demasiado complejo, comenzaremos a centrarnos demasiado en cada punto de datos individual de nuestro conjunto de entrenamiento y el modelo no se generalizará bien a los nuevos datos.
 
 
 ./t.sh  "There is a sweet spot in between that will yield the best generalization performance. This is the model we want to find." >> tt.txt
+
 Existe un punto intermedio que dará como resultado el mejor rendimiento de generalización. Este es el modelo que queremos encontrar.
 
 
 ./t.sh  "The trade-off between overfitting and underfitting is illustrated in Figure 2-1." >> tt.txt
+
 La compensación entre sobreajuste y subajuste se ilustra en la Figura 2-1.
 
 
-
-
-
 Figure 2-1. Trade-off of model complexity against training and test accuracy
-Relation of Model Complexity to Dataset Size
+
+**Relation of Model Complexity to Dataset Size**
+
 ./t.sh  "It’s important to note that model complexity is intimately tied to the variation of inputs contained in your training dataset: the larger variety of data points your data‐set contains, the more complex a model you can use without overfitting. Usually, collecting more data points will yield more variety, so larger datasets allow building more complex models. However, simply duplicating the same data points or collecting very similar data will not help." >> tt.txt
+
 Es importante tener en cuenta que la complejidad del modelo está íntimamente ligada a la variación de las entradas contenidas en el conjunto de datos de entrenamiento: cuanto mayor sea la variedad de puntos de datos que contenga el conjunto de datos, más complejo será el modelo que se puede utilizar sin sobreajustar. Por lo general, la recopilación de más puntos de datos dará como resultado una mayor variedad, por lo que los conjuntos de datos más grandes permiten construir modelos más complejos. Sin embargo, simplemente duplicar los mismos puntos de datos o recopilar datos muy similares no ayudará.
 
 
 ./t.sh  "Going back to the boat selling example, if we saw 10,000 more rows of customer data, and all of them complied with the rule “If the customer is older than 45, and has less than 3 children or is not divorced, then they want to buy a boat,” we would be much more likely to believe this to be a good rule than when it was developed using only the 12 rows in Table 2-1." >> tt.txt
+
 Volviendo al ejemplo de la venta de barcos, si viéramos 10.000 filas más de datos de clientes y todas ellas cumplieran con la regla “Si el cliente es mayor de 45 años, tiene menos de 3 hijos o no está divorciado, entonces quiere comprar un barco”, sería mucho más probable que creyéramos que se trata de una buena regla que cuando se desarrolló utilizando solo las 12 filas de la Tabla 2-1.
 
 
 ./t.sh  "Having more data and building appropriately more complex models can often work wonders for supervised learning tasks. In this book, we will focus on working with datasets of fixed sizes. In the real world, you often have the ability to decide how much data to collect, which might be more beneficial than tweaking and tuning your model. Never underestimate the power of more data." >> tt.txt
+
 Contar con más datos y crear modelos más complejos de forma adecuada puede resultar muy útil para las tareas de aprendizaje supervisado. En este libro, nos centraremos en trabajar con conjuntos de datos de tamaño fijo. En el mundo real, a menudo se puede decidir cuántos datos se van a recopilar, lo que puede resultar más beneficioso que modificar y ajustar el modelo. Nunca subestime el poder de contar con más datos.
 
 
 
-Supervised Machine Learning Algorithms
+**Supervised Machine Learning Algorithms**
+
 ./t.sh  "We will now review the most popular machine learning algorithms and explain how they learn from data and how they make predictions. We will also discuss how the concept of model complexity plays out for each of these models, and provide an overview of how each algorithm builds a model. We will examine the strengths and weaknesses of each algorithm, and what kind of data they can best be applied to. We will also explain the meaning of the most important parameters and options.4 Many algorithms have a classification and a regression variant, and we will describe both." >> tt.txt
+
 Ahora revisaremos los algoritmos de aprendizaje automático más populares y explicaremos cómo aprenden de los datos y cómo hacen predicciones. También analizaremos cómo se aplica el concepto de complejidad del modelo a cada uno de estos modelos y ofreceremos una descripción general de cómo cada algoritmo construye un modelo. Examinaremos las fortalezas y debilidades de cada algoritmo y a qué tipo de datos se pueden aplicar mejor. También explicaremos el significado de los parámetros y opciones más importantes.4 Muchos algoritmos tienen una clasificación y una variante de regresión, y describiremos ambas.
 
 
 ./t.sh  "It is not necessary to read through the descriptions of each algorithm in detail, but understanding the models will give you a better feeling for the different ways machine learning algorithms can work. This chapter can also be used as a reference guide, and you can come back to it when you are unsure about the workings of any of the algorithms." >> tt.txt
+
 No es necesario leer detalladamente las descripciones de cada algoritmo, pero comprender los modelos le dará una mejor idea de las diferentes formas en que pueden funcionar los algoritmos de aprendizaje automático. Este capítulo también se puede utilizar como guía de referencia y puede volver a él cuando no esté seguro del funcionamiento de cualquiera de los algoritmos.
 
-Some Sample Datasets
+**Some Sample Datasets**
+
 ./t.sh  "We will use several datasets to illustrate the different algorithms. Some of the datasets will be small and synthetic (meaning made-up), designed to highlight particular aspects of the algorithms. Other datasets will be large, real-world examples." >> tt.txt
+
 Usaremos varios conjuntos de datos para ilustrar los diferentes algoritmos. Algunos de los conjuntos de datos serán pequeños y sintéticos (es decir, inventados), diseñados para resaltar aspectos particulares de los algoritmos. Otros conjuntos de datos serán grandes ejemplos del mundo real.
 
 ./t.sh  "An example of a synthetic two-class classification dataset is the forge dataset, which has two features. The following code creates a scatter plot (Figure 2-2) visualizing all of the data points in this dataset. The plot has the first feature on the x-axis and the second feature on the y-axis. As is always the case in scatter plots, each data point is represented as one dot. The color and shape of the dot indicates its class:" >> tt.txt
+
 Un ejemplo de un conjunto de datos de clasificación sintético de dos clases es el conjunto de datos de forge, que tiene dos características. El siguiente código crea un diagrama de dispersión (Figura 2-2) que visualiza todos los puntos de datos en este conjunto de datos. La gráfica tiene la primera característica en el eje x y la segunda característica en el eje y. Como siempre ocurre en los diagramas de dispersión, cada punto de datos se representa como un punto. El color y la forma del punto indican su clase:
 
-In[1]:
-# generate dataset
-X, y = mglearn.datasets.make_forge()
-# plot dataset
-mglearn.discrete_scatter(X[:, 0], X[:, 1], y)
-plt.legend(["Class 0", "Class 1"], loc=4)
-plt.xlabel("First feature")
-plt.ylabel("Second feature")
-print("X.shape: {}".format(X.shape))
+.. code:: Python
 
-Out[1]:
-X.shape: (26, 2)
+   In[1]:
+   # generate dataset
+   X, y = mglearn.datasets.make_forge()
+   # plot dataset
+   mglearn.discrete_scatter(X[:, 0], X[:, 1], y)
+   plt.legend(["Class 0", "Class 1"], loc=4)
+   plt.xlabel("First feature")
+   plt.ylabel("Second feature")
+   print("X.shape: {}".format(X.shape))
+
+   Out[1]:
+   X.shape: (26, 2)
+
 4 Discussing all of them is beyond the scope of the book, and we refer you to the scikit-learn documentation for more details.
 
 
 ./t.sh  "As you can see from X.shape, this dataset consists of 26 data points, with 2 features. To illustrate regression algorithms, we will use the synthetic wave dataset. The wave dataset has a single input feature and a continuous target variable (or response) that we want to model. The plot created here (Figure 2-3) shows the single feature on the x-axis and the regression target (the output) on the y-axis:" >> tt.txt
+
 Como puede ver en X.shape, este conjunto de datos consta de 26 puntos de datos, con 2 características. Para ilustrar los algoritmos de regresión, utilizaremos el conjunto de datos de ondas sintéticas. El conjunto de datos de ondas tiene una única característica de entrada y una variable objetivo continua (o respuesta) que queremos modelar. El gráfico creado aquí (Figura 2-3) muestra la característica única en el eje x y el objetivo de regresión (la salida) en el eje y:
 
-In[2]:
-X, y = mglearn.datasets.make_wave(n_samples=40)
-plt.plot(X, y, 'o')
-plt.ylim(-3, 3)
-plt.xlabel("Feature")
-plt.ylabel("Target")
+.. code:: Python
+
+   In[2]:
+   X, y = mglearn.datasets.make_wave(n_samples=40)
+   plt.plot(X, y, 'o')
+   plt.ylim(-3, 3)
+   plt.xlabel("Feature")
+   plt.ylabel("Target")
 
 
 ./t.sh  "We are using these very simple, low-dimensional datasets because we can easily visualize them—a printed page has two dimensions, so data with more than two features is hard to show. Any intuition derived from datasets with few features (also called low-dimensional datasets) might not hold in datasets with many features (high- dimensional datasets). As long as you keep that in mind, inspecting algorithms on low-dimensional datasets can be very instructive." >> tt.txt
+
 Utilizamos estos conjuntos de datos muy simples y de baja dimensión porque podemos visualizarlos fácilmente: una página impresa tiene dos dimensiones, por lo que es difícil mostrar datos con más de dos características. Cualquier intuición derivada de conjuntos de datos con pocas características (también llamados conjuntos de datos de baja dimensión) podría no ser válida en conjuntos de datos con muchas características (conjuntos de datos de alta dimensión). Siempre que tenga esto en cuenta, inspeccionar algoritmos en conjuntos de datos de baja dimensión puede ser muy instructivo.
 
 
 ./t.sh  "We will complement these small synthetic datasets with two real-world datasets that are included in scikit-learn. One is the Wisconsin Breast Cancer dataset (cancer, for short), which records clinical measurements of breast cancer tumors. Each tumor is labeled as “benign” (for harmless tumors) or “malignant” (for cancerous tumors), and the task is to learn to predict whether a tumor is malignant based on the measurements of the tissue." >> tt.txt
+
 Complementaremos estos pequeños conjuntos de datos sintéticos con dos conjuntos de datos del mundo real que se incluyen en scikit-learn. Uno es el conjunto de datos de cáncer de mama de Wisconsin (cáncer, para abreviar), que registra mediciones clínicas de tumores de cáncer de mama. Cada tumor está etiquetado como “benigno” (para tumores inofensivos) o “maligno” (para tumores cancerosos), y la tarea es aprender a predecir si un tumor es maligno basándose en las mediciones del tejido.
 
 The data can be loaded using the load_breast_cancer function from scikit-learn:
-In[3]:
-from sklearn.datasets import load_breast_cancer
-cancer = load_breast_cancer()
-print("cancer.keys(): \n{}".format(cancer.keys()))
-Out[3]:
-cancer.keys():
-dict_keys(['feature_names', 'data', 'DESCR', 'target', 'target_names'])
+
+.. code:: Python
+
+   In[3]:
+   from sklearn.datasets import load_breast_cancer
+   cancer = load_breast_cancer()
+   print("cancer.keys(): \n{}".format(cancer.keys()))
+   Out[3]:
+   cancer.keys():
+   dict_keys(['feature_names', 'data', 'DESCR', 'target', 'target_names'])
 
 ./t.sh  "Datasets that are included in scikit-learn are usually stored as Bunch objects, which contain some information about the dataset as well as the actual data. All you need to know about Bunch objects is that they behave like dictionaries, with the added benefit that you can access values using a dot (as in bunch.key instead of bunch['key'])." >> tt.txt
+
 Los conjuntos de datos que se incluyen en scikit-learn generalmente se almacenan como objetos Bunch, que contienen información sobre el conjunto de datos y los datos reales. Todo lo que necesitas saber sobre los objetos Bunch es que se comportan como diccionarios, con el beneficio adicional de que puedes acceder a los valores usando un punto (como en ramo.key en lugar de ramo['clave']).
 
 The dataset consists of 569 data points, with 30 features each:
-In[4]:
-print("Shape of cancer data: {}".format(cancer.data.shape))
-Out[4]:
-Shape of cancer data: (569, 30)
+
+.. code:: Python
+
+   In[4]:
+   print("Shape of cancer data: {}".format(cancer.data.shape))
+   Out[4]:
+   Shape of cancer data: (569, 30)
+
 Of these 569 data points, 212 are labeled as malignant and 357 as benign:
-In[5]:
-print("Sample counts per class:\n{}".format(
-{n: v for n, v in zip(cancer.target_names, np.bincount(cancer.target))}))
-Out[5]:
-Sample counts per class:
-{'benign': 357, 'malignant': 212}
+
+.. code:: Python
+
+   In[5]:
+   print("Sample counts per class:\n{}".format(
+   {n: v for n, v in zip(cancer.target_names, np.bincount(cancer.target))}))
+   Out[5]:
+   Sample counts per class:
+   {'benign': 357, 'malignant': 212}
+
 To get a description of the semantic meaning of each feature, we can have a look at the feature_names attribute:
-In[6]:
-print("Feature names:\n{}".format(cancer.feature_names))
-Out[6]:
-Feature names:
-['mean radius' 'mean texture' 'mean perimeter' 'mean area'
-'mean smoothness' 'mean compactness' 'mean concavity'
-'mean concave points' 'mean symmetry' 'mean fractal dimension'
-'radius error' 'texture error' 'perimeter error' 'area error'
-'smoothness error' 'compactness error' 'concavity error'
-'concave points error' 'symmetry error' 'fractal dimension error'
-'worst radius' 'worst texture' 'worst perimeter' 'worst area'
-'worst smoothness' 'worst compactness' 'worst concavity'
-'worst concave points' 'worst symmetry' 'worst fractal dimension']
+
+.. code:: Python
+
+   In[6]:
+   print("Feature names:\n{}".format(cancer.feature_names))
+   Out[6]:
+   Feature names:
+   ['mean radius' 'mean texture' 'mean perimeter' 'mean area'
+   'mean smoothness' 'mean compactness' 'mean concavity'
+   'mean concave points' 'mean symmetry' 'mean fractal dimension'
+   'radius error' 'texture error' 'perimeter error' 'area error'
+   'smoothness error' 'compactness error' 'concavity error'
+   'concave points error' 'symmetry error' 'fractal dimension error'
+   'worst radius' 'worst texture' 'worst perimeter' 'worst area'
+   'worst smoothness' 'worst compactness' 'worst concavity'
+   'worst concave points' 'worst symmetry' 'worst fractal dimension']
 
 ./t.sh  "You can find out more about the data by reading cancer.DESCR if you are interested. We will also be using a real-world regression dataset, the Boston Housing dataset. The task associated with this dataset is to predict the median value of homes in several Boston neighborhoods in the 1970s, using information such as crime rate, proximity to the Charles River, highway accessibility, and so on. The dataset contains 506 data points, described by 13 features:" >> tt.txt
+
 Puede obtener más información sobre los datos leyendo cancer.DESCR si está interesado. También utilizaremos un conjunto de datos de regresión del mundo real, el conjunto de datos de Boston Housing. La tarea asociada con este conjunto de datos es predecir el valor medio de las viviendas en varios vecindarios de Boston en la década de 1970, utilizando información como la tasa de criminalidad, la proximidad al río Charles, la accesibilidad a las carreteras, etc. El conjunto de datos contiene 506 puntos de datos, descritos por 13 características:
 
-In[7]:
-from sklearn.datasets import load_boston
-boston = load_boston()
-print("Data shape: {}".format(boston.data.shape))
-Out[7]:
-Data shape: (506, 13)
+.. code:: Python
+
+   In[7]:
+   from sklearn.datasets import load_boston
+   boston = load_boston()
+   print("Data shape: {}".format(boston.data.shape))
+   Out[7]:
+   Data shape: (506, 13)
+
 ./t.sh  "Again, you can get more information about the dataset by reading the DESCR attribute of boston. For our purposes here, we will actually expand this dataset by not only considering these 13 measurements as input features, but also looking at all products (also called interactions) between features. In other words, we will not only consider crime rate and highway accessibility as features, but also the product of crime rate and highway accessibility. Including derived feature like these is called feature engineering, which we will discuss in more detail in Chapter 4. This derived dataset can be loaded using the load_extended_boston function::" >> tt.txt
+
 Nuevamente, puede obtener más información sobre el conjunto de datos leyendo el atributo DESCR de Boston. Para nuestros propósitos aquí, en realidad ampliaremos este conjunto de datos no solo considerando estas 13 mediciones como características de entrada, sino también analizando todos los productos (también llamados interacciones) entre características. En otras palabras, no sólo consideraremos la tasa de criminalidad y la accesibilidad a las carreteras como características, sino también el producto de la tasa de criminalidad y la accesibilidad a las carreteras. Incluir características derivadas como estas se llama ingeniería de características, que discutiremos con más detalle en el Capítulo 4. Este conjunto de datos derivados se puede cargar usando la función load_extended_boston::
 
-In[8]:
-X, y = mglearn.datasets.load_extended_boston()
-print("X.shape: {}".format(X.shape))
-Out[8]:
-X.shape: (506, 104)
+.. code:: Python
+
+   In[8]:
+   X, y = mglearn.datasets.load_extended_boston()
+   print("X.shape: {}".format(X.shape))
+   Out[8]:
+   X.shape: (506, 104)
+
 ./t.sh  "The resulting 104 features are the 13 original features together with the 91 possible combinations of two features within those 13 (with replacement).5 We will use these datasets to explain and illustrate the properties of the different machine learning algorithms. But for now, let’s get to the algorithms themselves. First, we will revisit the k-nearest neighbors (k-NN) algorithm that we saw in the previous chapter." >> tt.txt
+
 Las 104 características resultantes son las 13 características originales junto con las 91 combinaciones posibles de dos características dentro de esas 13 (con reemplazo).5 Usaremos estos conjuntos de datos para explicar e ilustrar las propiedades de los diferentes algoritmos de aprendizaje automático. Pero por ahora, vayamos a los algoritmos en sí. Primero, revisaremos el algoritmo de k vecinos más cercanos (k-NN) que vimos en el capítulo anterior.
 
 5 This is 13 interactions for the first feature, plus 12 for the second not involving the first, plus 11 for the third and so on (13 + 12 + 11 + … + 1 = 91).
-k-Nearest Neighbors
+
+**k-Nearest Neighbors**
+
 ./t.sh  "The k-NN algorithm is arguably the simplest machine learning algorithm. Building the model consists only of storing the training dataset. To make a prediction for a new data point, the algorithm finds the closest data points in the training dataset—its “nearest neighbors.”" >> tt.txt
+
 El algoritmo k-NN es posiblemente el algoritmo de aprendizaje automático más simple. La construcción del modelo consiste únicamente en almacenar el conjunto de datos de entrenamiento. Para hacer una predicción para un nuevo punto de datos, el algoritmo encuentra los puntos de datos más cercanos en el conjunto de datos de entrenamiento: sus "vecinos más cercanos".
 
-k-Neighbors classification
+**k-Neighbors classification**
+
 ./t.sh  "In its simplest version, the k-NN algorithm only considers exactly one nearest neighbor, which is the closest training data point to the point we want to make a prediction for. The prediction is then simply the known output for this training point. Figure 2-4 illustrates this for the case of classification on the forge dataset:" >> tt.txt
+
 En su versión más simple, el algoritmo k-NN solo considera exactamente un vecino más cercano, que es el punto de datos de entrenamiento más cercano al punto para el que queremos hacer una predicción. La predicción es entonces simplemente el resultado conocido para este punto de entrenamiento. La Figura 2-4 ilustra esto para el caso de clasificación en el conjunto de datos de Forge:
 
-In[9]:
-mglearn.plots.plot_knn_classification(n_neighbors=1)
+.. code:: Python
+
+   In[9]:
+   mglearn.plots.plot_knn_classification(n_neighbors=1)
 
 
 Figure 2-4. Predictions made by the one-nearest-neighbor model on the forge dataset
 
 ./t.sh  "Here, we added three new data points, shown as stars. For each of them, we marked the closest point in the training set. The prediction of the one-nearest-neighbor algorithm is the label of that point (shown by the color of the cross)." >> tt.txt
+
 Aquí, agregamos tres nuevos puntos de datos, que se muestran como estrellas. Para cada uno de ellos, marcamos el punto más cercano en el conjunto de entrenamiento. La predicción del algoritmo de un vecino más cercano es la etiqueta de ese punto (que se muestra con el color de la cruz).
 
 
 ./t.sh  "Instead of considering only the closest neighbor, we can also consider an arbitrary number, k, of neighbors. This is where the name of the k-nearest neighbors algorithm comes from. When considering more than one neighbor, we use voting to assign a label. This means that for each test point, we count how many neighbors belong to class 0 and how many neighbors belong to class 1. We then assign the class that is more frequent: in other words, the majority class among the k-nearest neighbors. The following example (Figure 2-5) uses the three closest neighbors:" >> tt.txt
+
 En lugar de considerar sólo el vecino más cercano, también podemos considerar un número arbitrario, k, de vecinos. De aquí proviene el nombre del algoritmo de k vecinos más cercanos. Cuando consideramos más de un vecino, utilizamos la votación para asignar una etiqueta. Esto significa que para cada punto de prueba, contamos cuántos vecinos pertenecen a la clase 0 y cuántos vecinos pertenecen a la clase 1. Luego asignamos la clase que es más frecuente: en otras palabras, la clase mayoritaria entre los k vecinos más cercanos. El siguiente ejemplo (Figura 2-5) utiliza los tres vecinos más cercanos:
 
-In[10]:
-mglearn.plots.plot_knn_classification(n_neighbors=3)
+.. code:: Python
+
+   In[10]:
+   mglearn.plots.plot_knn_classification(n_neighbors=3)
 
 Figure 2-5. Predictions made by the three-nearest-neighbors model on the forge dataset
 
 ./t.sh  "Again, the prediction is shown as the color of the cross. You can see that the prediction for the new data point at the top left is not the same as the prediction when we used only one neighbor." >> tt.txt
+
 Nuevamente, la predicción se muestra como el color de la cruz. Puedes ver que la predicción para el nuevo punto de datos en la parte superior izquierda no es la misma que la predicción cuando usamos solo un vecino.
 
 
 ./t.sh  "While this illustration is for a binary classification problem, this method can be applied to datasets with any number of classes. For more classes, we count how many neighbors belong to each class and again predict the most common class." >> tt.txt
+
 Si bien esta ilustración corresponde a un problema de clasificación binaria, este método se puede aplicar a conjuntos de datos con cualquier cantidad de clases. Para más clases, contamos cuántos vecinos pertenecen a cada clase y nuevamente predecimos la clase más común.
 
 
 ./t.sh  "Now let’s look at how we can apply the k-nearest neighbors algorithm using scikit- learn. First, we split our data into a training and a test set so we can evaluate generalization performance, as discussed in Chapter 1:" >> tt.txt
+
 Ahora veamos cómo podemos aplicar el algoritmo de k vecinos más cercanos usando scikit-learn. Primero, dividimos nuestros datos en un conjunto de entrenamiento y de prueba para que podamos evaluar el rendimiento de la generalización, como se analiza en el Capítulo 1:
 
-In[11]:
-from sklearn.model_selection import train_test_split
-X, y = mglearn.datasets.make_forge()
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+.. code:: Python
+
+   In[11]:
+   from sklearn.model_selection import train_test_split
+   X, y = mglearn.datasets.make_forge()
+   X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
 ./t.sh  "Next, we import and instantiate the class. This is when we can set parameters, like the number of neighbors to use. Here, we set it to 3:" >> tt.txt
-In[12]:
-from sklearn.neighbors import KNeighborsClassifier
-clf = KNeighborsClassifier(n_neighbors=3)
+
+.. code:: Python
+
+   In[12]:
+   from sklearn.neighbors import KNeighborsClassifier
+   clf = KNeighborsClassifier(n_neighbors=3)
+
 Now, we fit the classifier using the training set. For KNeighborsClassifier this
 means storing the dataset, so we can compute neighbors during prediction:
-In[13]:
-clf.fit(X_train, y_train)
+
+.. code:: Python
+
+   In[13]:
+   clf.fit(X_train, y_train)
 
 ./t.sh  "To make predictions on the test data, we call the predict method. For each data point in the test set, this computes its nearest neighbors in the training set and finds the most common class among these:" >> tt.txt
+
 Para hacer predicciones sobre los datos de prueba, utilizamos el método de predicción. Para cada punto de datos del conjunto de prueba, calcula sus vecinos más cercanos en el conjunto de entrenamiento y encuentra la clase más común entre ellos:
 
+.. code:: Python
 
-In[14]:
-print("Test set predictions: {}".format(clf.predict(X_test)))
-Out[14]:
-Test set predictions: [1 0 1 0 1 0 0]
+   In[14]:
+   print("Test set predictions: {}".format(clf.predict(X_test)))
+   Out[14]:
+   Test set predictions: [1 0 1 0 1 0 0]
+
 ./t.sh  "To evaluate how well our model generalizes, we can call the score method with the test data together with the test labels:" >> tt.txt
+
 Para evaluar qué tan bien se generaliza nuestro modelo, podemos llamar al método de puntuación con los datos de prueba junto con las etiquetas de prueba:
 
+.. code:: Python
 
-In[15]:
-print("Test set accuracy: {:.2f}".format(clf.score(X_test, y_test)))
-Out[15]:
-Test set accuracy: 0.86
+   In[15]:
+   print("Test set accuracy: {:.2f}".format(clf.score(X_test, y_test)))
+   Out[15]:
+   Test set accuracy: 0.86
+
 ./t.sh  "We see that our model is about 86% accurate, meaning the model predicted the class correctly for 86% of the samples in the test dataset." >> tt.txt
+
 Vemos que nuestro modelo tiene una precisión de aproximadamente el 86 %, lo que significa que el modelo predijo la clase correctamente para el 86 % de las muestras en el conjunto de datos de prueba.
 
 
-Analyzing KNeighborsClassifier
+**Analyzing KNeighborsClassifier**
+
 For two-dimensional datasets, we can also illustrate the prediction for all possible test points in the xy-plane. We color the plane according to the class that would be assigned to a point in this region. This lets us view the decision boundary, which is the divide between where the algorithm assigns class 0 versus where it assigns class 1.
+
 En el caso de conjuntos de datos bidimensionales, también podemos ilustrar la predicción para todos los puntos de prueba posibles en el plano xy. Coloreamos el plano según la clase que se asignaría a un punto en esta región. Esto nos permite ver el límite de decisión, que es la división entre el lugar donde el algoritmo asigna la clase 0 y el lugar donde asigna la clase 1.
 
 
 The following code produces the visualizations of the decision boundaries for one, three, and nine neighbors shown in Figure 2-6:
+
 El siguiente código produce las visualizaciones de los límites de decisión para uno, tres y nueve vecinos que se muestran en la Figura 2-6:
 
+.. code:: Python
 
-In[16]:
-fig, axes = plt.subplots(1, 3, figsize=(10, 3))
-for n_neighbors, ax in zip([1, 3, 9], axes):
-# the fit method returns the object self, so we can instantiate
-# and fit in one line
-clf = KNeighborsClassifier(n_neighbors=n_neighbors).fit(X, y)
-mglearn.plots.plot_2d_separator(clf, X, fill=True, eps=0.5, ax=ax, alpha=.4)
-mglearn.discrete_scatter(X[:, 0], X[:, 1], y, ax=ax)
-ax.set_title("{} neighbor(s)".format(n_neighbors))
-ax.set_xlabel("feature 0")
-ax.set_ylabel("feature 1")
-axes[0].legend(loc=3)
+   In[16]:
+   fig, axes = plt.subplots(1, 3, figsize=(10, 3))
+   for n_neighbors, ax in zip([1, 3, 9], axes):
+   # the fit method returns the object self, so we can instantiate
+   # and fit in one line
+   clf = KNeighborsClassifier(n_neighbors=n_neighbors).fit(X, y)
+   mglearn.plots.plot_2d_separator(clf, X, fill=True, eps=0.5, ax=ax, alpha=.4)
+   mglearn.discrete_scatter(X[:, 0], X[:, 1], y, ax=ax)
+   ax.set_title("{} neighbor(s)".format(n_neighbors))
+   ax.set_xlabel("feature 0")
+   ax.set_ylabel("feature 1")
+   axes[0].legend(loc=3)
 
 
 As you can see on the left in the figure, using a single neighbor results in a decision boundary that follows the training data closely. Considering more and more neighbors leads to a smoother decision boundary. A smoother boundary corresponds to a simpler model. In other words, using few neighbors corresponds to high model complexity (as shown on the left side of Figure 2-1), and using many neighbors corresponds to low model complexity (as shown on the right side of Figure 2-1). If you consider the extreme case where the number of neighbors is the number of all data points in the training set, each test point would have exactly the same neighbors (all training points) and all predictions would be the same: the class that is most frequent in the training set.
+
 Como puede ver a la izquierda de la figura, el uso de un solo vecino da como resultado un límite de decisión que sigue de cerca los datos de entrenamiento. Si se consideran más y más vecinos, se obtiene un límite de decisión más suave. Un límite más suave corresponde a un modelo más simple. En otras palabras, el uso de pocos vecinos corresponde a una alta complejidad del modelo (como se muestra en el lado izquierdo de la Figura 2-1), y el uso de muchos vecinos corresponde a una baja complejidad del modelo (como se muestra en el lado derecho de la Figura 2-1). Si considera el caso extremo en el que la cantidad de vecinos es la cantidad de todos los puntos de datos en el conjunto de entrenamiento, cada punto de prueba tendría exactamente los mismos vecinos (todos los puntos de entrenamiento) y todas las predicciones serían las mismas: la clase que es más frecuente en el conjunto de entrenamiento.
 
 
 Let’s investigate whether we can confirm the connection between model complexity and generalization that we discussed earlier. We will do this on the real-world Breast Cancer dataset. We begin by splitting the dataset into a training and a test set. Then we evaluate training and test set performance with different numbers of neighbors.
+
 Investiguemos si podemos confirmar la conexión entre la complejidad del modelo y la generalización que analizamos anteriormente. Lo haremos con el conjunto de datos de cáncer de mama del mundo real. Comenzamos dividiendo el conjunto de datos en un conjunto de entrenamiento y uno de prueba. Luego evaluamos el rendimiento del conjunto de entrenamiento y de prueba con diferentes cantidades de vecinos.
 
 
 The results are shown in Figure 2-7:
-In[17]:
-from sklearn.datasets import load_breast_cancer
-cancer = load_breast_cancer()
-X_train, X_test, y_train, y_test = train_test_split(
-cancer.data, cancer.target, stratify=cancer.target, random_state=66)
-training_accuracy = []
-test_accuracy = []
-# try n_neighbors from 1 to 10
-neighbors_settings = range(1, 11)
-for n_neighbors in neighbors_settings:
-# build the model
-clf = KNeighborsClassifier(n_neighbors=n_neighbors)
-clf.fit(X_train, y_train)
-# record training set accuracy
-training_accuracy.append(clf.score(X_train, y_train))
-# record generalization accuracy
-test_accuracy.append(clf.score(X_test, y_test))
-plt.plot(neighbors_settings, training_accuracy, label="training accuracy")
-plt.plot(neighbors_settings, test_accuracy, label="test accuracy")
-plt.ylabel("Accuracy")
-plt.xlabel("n_neighbors")
-plt.legend()
+
+.. code:: Python
+
+   In[17]:
+   from sklearn.datasets import load_breast_cancer
+   cancer = load_breast_cancer()
+   X_train, X_test, y_train, y_test = train_test_split(
+   cancer.data, cancer.target, stratify=cancer.target, random_state=66)
+   training_accuracy = []
+   test_accuracy = []
+   # try n_neighbors from 1 to 10
+   neighbors_settings = range(1, 11)
+   for n_neighbors in neighbors_settings:
+   # build the model
+   clf = KNeighborsClassifier(n_neighbors=n_neighbors)
+   clf.fit(X_train, y_train)
+   # record training set accuracy
+   training_accuracy.append(clf.score(X_train, y_train))
+   # record generalization accuracy
+   test_accuracy.append(clf.score(X_test, y_test))
+   plt.plot(neighbors_settings, training_accuracy, label="training accuracy")
+   plt.plot(neighbors_settings, test_accuracy, label="test accuracy")
+   plt.ylabel("Accuracy")
+   plt.xlabel("n_neighbors")
+   plt.legend()
 
 The plot shows the training and test set accuracy on the y-axis against the setting of n_neighbors on the x-axis. While real-world plots are rarely very smooth, we can still recognize some of the characteristics of overfitting and underfitting (note that because considering fewer neighbors corresponds to a more complex model, the plot is horizontally flipped relative to the illustration in Figure 2-1). Considering a single nearest neighbor, the prediction on the training set is perfect. But when more neighbors are considered, the model becomes simpler and the training accuracy drops. The test set accuracy for using a single neighbor is lower than when using more neighbors, indicating that using the single nearest neighbor leads to a model that is too complex. On the other hand, when considering 10 neighbors, the model is too simple and performance is even worse. The best performance is somewhere in the middle, using around six neighbors. Still, it is good to keep the scale of the plot in mind. The worst performance is around 88% accuracy, which might still be acceptable.
+
 El gráfico muestra la precisión del conjunto de entrenamiento y prueba en el eje y frente a la configuración de n_vecinos en el eje x. Si bien los gráficos del mundo real rara vez son muy uniformes, aún podemos reconocer algunas de las características del sobreajuste y el subajuste (tenga en cuenta que, dado que considerar menos vecinos corresponde a un modelo más complejo, el gráfico está invertido horizontalmente en relación con la ilustración de la Figura 2-1). Si se considera un solo vecino más cercano, la predicción en el conjunto de entrenamiento es perfecta. Pero cuando se consideran más vecinos, el modelo se vuelve más simple y la precisión del entrenamiento disminuye. La precisión del conjunto de prueba para usar un solo vecino es menor que cuando se usan más vecinos, lo que indica que usar el único vecino más cercano conduce a un modelo demasiado complejo. Por otro lado, cuando se consideran 10 vecinos, el modelo es demasiado simple y el rendimiento es incluso peor. El mejor rendimiento está en algún punto intermedio, utilizando alrededor de seis vecinos. Aun así, es bueno tener en cuenta la escala del gráfico. El peor rendimiento está en torno al 88 % de precisión, que aún podría ser aceptable.
 
 
-|
+**k-neighbors regression**
 
-k-neighbors regression
 There is also a regression variant of the k-nearest neighbors algorithm. Again, let’s start by using the single nearest neighbor, this time using the wave dataset. We’ve added three test data points as green stars on the x-axis. The prediction using a single neighbor is just the target value of the nearest neighbor. These are shown as blue stars in Figure 2-8:
+
 También existe una variante de regresión del algoritmo de los k vecinos más cercanos. Nuevamente, comencemos utilizando el vecino más cercano, esta vez utilizando el conjunto de datos de ondas. Hemos agregado tres puntos de datos de prueba como estrellas verdes en el eje x. La predicción utilizando un solo vecino es solo el valor objetivo del vecino más cercano. Estos se muestran como estrellas azules en la Figura 2-8:
 
 
-In[18]:
-mglearn.plots.plot_knn_regression(n_neighbors=1)
+.. code:: Python
+
+   In[18]:
+   mglearn.plots.plot_knn_regression(n_neighbors=1)
 
 Figure 2-8. Predictions made by one-nearest-neighbor regression on the wave dataset
 
 Again, we can use more than the single closest neighbor for regression. When using multiple nearest neighbors, the prediction is the average, or mean, of the relevant neighbors (Figure 2-9):
+
 Nuevamente, podemos utilizar más de un vecino más cercano para la regresión. Cuando se utilizan varios vecinos más cercanos, la predicción es el promedio o la media de los vecinos relevantes (Figura 2-9):
 
+.. code:: Python
 
-In[19]:
-mglearn.plots.plot_knn_regression(n_neighbors=3)
+   In[19]:
+   mglearn.plots.plot_knn_regression(n_neighbors=3)
 
 Figure 2-9. Predictions made by three-nearest-neighbors regression on the wave dataset
+
 The k-nearest neighbors algorithm for regression is implemented in the KNeighbors Regressor class in scikit-learn. It’s used similarly to KNeighborsClassifier:
+
 El algoritmo de k vecinos más cercanos para la regresión se implementa en la clase KNeighbors Regressor en scikit-learn. Se utiliza de forma similar a KNeighborsClassifier:
 
+.. code:: Python
 
-In[20]:
-from sklearn.neighbors import KNeighborsRegressor
-X, y = mglearn.datasets.make_wave(n_samples=40)
-# split the wave dataset into a training and a test set
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
-# instantiate the model and set the number of neighbors to consider to 3
-reg = KNeighborsRegressor(n_neighbors=3)
-# fit the model using the training data and training targets
-reg.fit(X_train, y_train)
+   In[20]:
+   from sklearn.neighbors import KNeighborsRegressor
+   X, y = mglearn.datasets.make_wave(n_samples=40)
+   # split the wave dataset into a training and a test set
+   X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+   # instantiate the model and set the number of neighbors to consider to 3
+   reg = KNeighborsRegressor(n_neighbors=3)
+   # fit the model using the training data and training targets
+   reg.fit(X_train, y_train)
 
 Now we can make predictions on the test set:
 
-In[21]:
-print("Test set predictions:\n{}".format(reg.predict(X_test)))
-Out[21]:
-Test set predictions:
-[-0.054 0.357 1.137 -1.894 -1.139 -1.631
-0.357
-0.912 -0.447 -1.139]
+.. code:: Python
+
+   In[21]:
+   print("Test set predictions:\n{}".format(reg.predict(X_test)))
+   Out[21]:
+   Test set predictions:
+   [-0.054 0.357 1.137 -1.894 -1.139 -1.631
+   0.357
+   0.912 -0.447 -1.139]
 
 We can also evaluate the model using the score method, which for regressors returns the R2 score. The R2 score, also known as the coefficient of determination, is a measure of goodness of a prediction for a regression model, and yields a score between 0 and 1. A value of 1 corresponds to a perfect prediction, and a value of 0 corresponds to a constant model that just predicts the mean of the training set responses, y_train:
+
 También podemos evaluar el modelo utilizando el método de puntuación, que para los regresores devuelve la puntuación R2. La puntuación R2, también conocida como coeficiente de determinación, es una medida de la bondad de una predicción para un modelo de regresión y arroja una puntuación entre 0 y 1. Un valor de 1 corresponde a una predicción perfecta y un valor de 0 corresponde a un modelo constante que solo predice la media de las respuestas del conjunto de entrenamiento, y_train:
 
 
